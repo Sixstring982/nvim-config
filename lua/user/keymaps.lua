@@ -16,7 +16,7 @@ nnoremap("<Space>4", "<C-w>4w")
 nnoremap("<Space>5", "<C-w>5w")
 nnoremap("<Space>6", "<C-w>6w")
 
--- Open previous buffer
+-- Open alternate buffer
 nnoremap("<Space><Tab>", ":b#<CR>")
 
 -- Opening files
@@ -25,6 +25,7 @@ nnoremap("<Space>pp", "<cmd>lua require('telescope.builtin').find_files()<CR>")
 nnoremap("<C-x>b", "<cmd>lua require('telescope.builtin').buffers()<CR>")
 -- Fuzzy-find + grep
 nnoremap("<Space>ps", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
+nnoremap("<Space>pl", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
 
 -- Format current buffer
 nnoremap("<leader>f", "<cmd> lua vim.lsp.buf.format()<CR>")
@@ -41,6 +42,21 @@ nnoremap("<C-x>k", ":bp<BAR>:bd#<CR>")
 -- Go to next error
 nnoremap("<Space>en", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 nnoremap("<Space>ep", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+
+-- Redo layout
+vim.api.nvim_create_user_command("Relayout", function()
+  -- Close all windows
+  vim.cmd("only")
+
+  vim.cmd("vsplit")
+  vim.cmd("vsplit")
+  vim.cmd("windo2")
+  vim.cmd("split")
+  vim.cmd("Gedit :")
+  vim.cmd("windo3")
+  require("harpoon.term").gotoTerminal(1)
+  vim.cmd("windo0")
+end, { force = true })
 
 -- Fix errors
 nnoremap("<Space>aa", "<cmd>lua vim.lsp.buf.code_action()<CR>")
