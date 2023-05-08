@@ -51,10 +51,8 @@ vim.api.nvim_create_user_command("Relayout", function()
   vim.cmd("vsplit")
   vim.cmd("vsplit")
   vim.cmd("windo2")
-  vim.cmd("split")
-  vim.cmd("Gedit :")
-  vim.cmd("windo3")
   require("harpoon.term").gotoTerminal(1)
+  vim.api.nvim_win_set_width(0, 99)
   vim.cmd("windo0")
 end, { force = true })
 
@@ -107,3 +105,15 @@ end)
 nnoremap("<Space>cr", function()
   tmux.re_run()
 end)
+
+-- Git commands
+--
+-- [G]it [s]tatus (open Fugitive)
+nnoremap("<Space>gs", "<cmd>Gedit :<CR>")
+-- [G]it [d]iff (for fixing merge conflicts)
+nnoremap("<Space>gd", function()
+  -- Open a new tab focusing the current file...
+  vim.cmd("tab split")
+  vim.cmd("Gvdiffsplit!")
+end)
+

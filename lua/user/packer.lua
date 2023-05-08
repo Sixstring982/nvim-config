@@ -40,6 +40,7 @@ packer.startup(function(use)
 	use("catppuccin/nvim")
 	use("rakr/vim-two-firewatch")
 	use("morhetz/gruvbox")
+  use("savq/melange-nvim")
 
 	-- Install treesitter for better syntax highlighting
 	use({

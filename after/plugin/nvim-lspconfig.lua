@@ -44,6 +44,7 @@ end
 
 -- LSP servers to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
+  astro = {},
 	tsserver = {
 		settings = {
 			experimental = {
@@ -54,7 +55,9 @@ local servers = {
 			["textDocument/publishDiagnostics"] = vim.lsp.with(tsserver_on_publish_diagnostics_override, {}),
 		},
 	},
+  bufls = {},
 	cssls = {},
+  eslint = {},
 	jsonls = {},
 	marksman = {},
 	sqlls = {},
@@ -121,14 +124,14 @@ null_ls.setup({
 		formatting.ocamlformat,
 
 		-- diagnostics
-		diagnostics.eslint_d.with({
+		diagnostics.eslint.with({
 			condition = function(utils)
 				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
 			end,
 		}),
 
 		-- code actions
-		code_actions.eslint_d.with({
+		code_actions.eslint.with({
 			condition = function(utils)
 				return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
 			end,

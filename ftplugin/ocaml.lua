@@ -2,6 +2,7 @@ local tmux = require("user.lib.tmux")
 local git = require("user.lib.git")
 local nnoremap = require("user.keymap_utils").nnoremap
 local strings = require("user.lib.strings")
+local quickfix = require("user.quickfix")
 
 -- Set ruler
 vim.opt.colorcolumn = "100"
@@ -37,11 +38,23 @@ end)
 nnoremap("<Space>rd", function()
 	tmux.run("cd " .. code_path() .. " && dune build -w")
 end)
+-- [R]un dune build [h]ere
+nnoremap("<Space>rh", function()
+  tmux.run("cd " .. code_path() .. " && dune build " .. vim.fn.expand("%:.:h") .. " -w")
+end)
 -- [R]un dune [t]est
 nnoremap("<Space>rt", function()
-	tmux.run("cd " .. code_path() .. " && dune test " .. vim.fn.expand("%:.:h") .. " -j 1 -w")
+	tmux.run("cd " .. code_path() .. " && dune test " .. vim.fn.expand("%:.:h") .. " -w")
 end)
 -- [R]un dune @[f]mt
 nnoremap("<Space>rf", function()
 	tmux.run("cd " .. code_path() .. " && dune build @fmt --auto-promote")
+end)
+-- [R]un dune, populating errors for [q]uickfix
+nnoremap("<Space>rq", function()
+  print("Populating quickfix...")
+  quickfix.populate_quickfix_with_command("cd " .. code_path() .. " && dune build", function(line)
+    return line:match('File "(.+)", line (%d+), characters (%d+)-%d+:')
+  end)
+  print("Done.")
 end)

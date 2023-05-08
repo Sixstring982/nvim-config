@@ -151,6 +151,11 @@ _G.packer_plugins = {
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["melange-nvim"] = {
+    loaded = true,
+    path = "/Users/trent/.local/share/nvim/site/pack/packer/start/melange-nvim",
+    url = "https://github.com/savq/melange-nvim"
+  },
   ["neodev.nvim"] = {
     loaded = true,
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/neodev.nvim",
