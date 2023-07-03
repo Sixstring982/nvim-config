@@ -9,3 +9,6 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+-- Enable folding via markers
+vim.opt.foldmethod = "marker"
+vim.opt.foldlevel = 1

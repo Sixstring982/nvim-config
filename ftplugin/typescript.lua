@@ -5,7 +5,7 @@ local quickfix = require("user.quickfix")
 
 -- Set ruler
 vim.opt.colorcolumn = "80"
---
+
 -- Enable spell checking
 vim.opt.spell = true
 
@@ -16,33 +16,7 @@ end
 --
 -- Kebindings
 --
--- [R]un yarn [d]ev
-nnoremap("<Space>rd", function()
-	tmux.run("cd " .. frontend_path() .. " && yarn dev")
-end)
--- [R]un [f]ormatter (prettier)
-nnoremap("<Space>rf", function()
-	tmux.run(
-		"cd "
-			.. frontend_path()
-			.. " && yarn prettier  ./api ./components ./library ./models ./pages ./state ./stories/ --write"
-	)
-end)
 
-nnoremap("<Space>rl", function()
-	tmux.run(
-		"cd "
-			.. frontend_path()
-			.. " && "
-			.. "yarn lint ./api ./components ./library ./models ./pages ./state ./stories/"
-	)
-end)
-nnoremap("<Space>rt", function()
-	tmux.run("cd " .. frontend_path() .. " && yarn test:unit " .. vim.fn.expand("%:.:h") .. " --watchAll")
-end)
-nnoremap("<Space>rx", function()
-	tmux.run("cd " .. frontend_path() .. " && yarn typecheck --watch")
-end)
 -- [R]un tsc, populating errors for [q]uickfix
 nnoremap("<Space>rq", function()
 	print("Populating quickfix...")

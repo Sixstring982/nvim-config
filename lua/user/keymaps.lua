@@ -1,3 +1,4 @@
+local git = require("user.lib.git")
 local nnoremap = require("user.keymap_utils").nnoremap
 local tmux = require("user.lib.tmux")
 
@@ -117,3 +118,63 @@ nnoremap("<Space>gd", function()
   vim.cmd("Gvdiffsplit!")
 end)
 
+--
+-- Run commands
+--
+
+--
+-- OCaml
+--
+-- [R]un [O]Caml: [b]uild
+nnoremap("<Space>rod", function()
+	tmux.run("cd " .. git.code_path() .. " && dune build -w")
+end)
+-- [R]un [O]Caml: build [h]ere
+nnoremap("<Space>roh", function()
+  tmux.run("cd " .. git.code_path() .. " && dune build " .. vim.fn.expand("%:.:h") .. " -w")
+end)
+-- [R]un [O]Caml: [t]est
+nnoremap("<Space>rot", function()
+	tmux.run("cd " .. git.code_path() .. " && dune test " .. vim.fn.expand("%:.:h") .. " -w")
+end)
+-- [R]un [O]Caml: [f]ormat
+nnoremap("<Space>rof", function()
+	tmux.run("cd " .. git.code_path() .. " && dune build @fmt --auto-promote")
+end)
+
+--
+-- TypeScript
+--
+-- [R]un [T]ypeScript: [d]ev
+nnoremap("<Space>rtd", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn dev")
+end)
+-- [R]un [T]ypeScript: [f]ormat
+nnoremap("<Space>rtf", function()
+	tmux.run(
+		"cd "
+			.. git.frontend_path()
+			.. " && yarn prettier $(git diff --relative --name-only HEAD) --write"
+	)
+end)
+-- [R]un [T]ypeScript: [l]int
+nnoremap("<Space>rtl", function()
+	tmux.run(
+		"cd "
+			.. git.frontend_path()
+			.. " && "
+			.. "yarn lint $(git diff --relative --name-only HEAD) --fix"
+	)
+end)
+-- [R]un [T]ypeScript: [t]est
+nnoremap("<Space>rtt", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn test:unit " .. vim.fn.expand("%:p") .. " --watchAll")
+end)
+-- [R]un [T]ypeScript: type check
+nnoremap("<Space>rtx", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn typecheck --watch")
+end)
+-- [R]un [T]ypeScript: [g]enerate protos
+nnoremap("<Space>rtg", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn protogen")
+end)
