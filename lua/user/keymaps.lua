@@ -27,6 +27,8 @@ nnoremap("<C-x>b", "<cmd>lua require('telescope.builtin').buffers()<CR>")
 -- Fuzzy-find + grep
 nnoremap("<Space>ps", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
 nnoremap("<Space>pl", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
+-- Query LSP errors
+nnoremap("<Space>pq", "<cmd>lua require('telescope.builtin').diagnostics()<CR>")
 
 -- Format current buffer
 nnoremap("<leader>f", "<cmd> lua vim.lsp.buf.format()<CR>")
