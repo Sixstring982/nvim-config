@@ -47,17 +47,23 @@ nnoremap("<Space>en", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 nnoremap("<Space>ep", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
 -- Redo layout
-vim.api.nvim_create_user_command("Relayout", function()
+vim.api.nvim_create_user_command("Relayout", function(opts)
+  -- The number of left-windows to create: Defaults to 2.
+  local splits = opts['fargs'][1] or 2
+
   -- Close all windows
   vim.cmd("only")
 
-  vim.cmd("vsplit")
-  vim.cmd("vsplit")
+  -- Create the "left-windows"
+  for _ = 1, splits do
+    vim.cmd("vsplit")
+  end
+
   vim.cmd("windo2")
   require("harpoon.term").gotoTerminal(1)
   vim.api.nvim_win_set_width(0, 99)
   vim.cmd("windo0")
-end, { force = true })
+end, { force = true, nargs = "?" })
 
 -- Fix errors
 nnoremap("<Space>aa", "<cmd>lua vim.lsp.buf.code_action()<CR>")
@@ -88,6 +94,11 @@ nnoremap("<C-d>", "<C-d>zz")
 -- Center screen when using up/down-paragraph
 nnoremap("{", "{zz")
 nnoremap("}", "}zz")
+
+-- LSP control
+--
+-- Restart LSP
+nnoremap("<Space>lr", "<cmd>LspRestart<CR>")
 
 -- Tmux window
 --
@@ -143,6 +154,23 @@ end)
 nnoremap("<Space>rof", function()
 	tmux.run("cd " .. git.code_path() .. " && dune build @fmt --auto-promote")
 end)
+
+--
+-- Protobuf
+--
+-- [R]un [P]roto: format
+nnoremap("<Space>rpf", function()
+	tmux.run("cd " .. git.code_path() .. " && buf format --path skproto -w")
+end)
+-- [R]un [P]roto: breaking
+nnoremap("<Space>rpx", function()
+	tmux.run("cd " .. git.code_path() .. ' && buf breaking --path skproto --against=".git#branch=staging"')
+end)
+-- [R]un [P]roto: lint
+nnoremap("<Space>rpl", function()
+	tmux.run("cd " .. git.code_path() .. " && buf lint --path skproto")
+end)
+
 
 --
 -- TypeScript
