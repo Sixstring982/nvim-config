@@ -131,7 +131,12 @@ nnoremap("<Space>gd", function()
   vim.cmd("Gvdiffsplit!")
 end)
 
+-- DB (Dadbod UI) commands
 --
+-- Open [D]ad[b]od UI
+nnoremap("<Space>db", "<cmd>DBUI<CR>")
+
+
 -- Run commands
 --
 
