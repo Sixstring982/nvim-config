@@ -64,6 +64,8 @@ vim.api.nvim_create_user_command("Relayout", function(opts)
   vim.api.nvim_win_set_width(0, 99)
   vim.cmd("windo0")
 end, { force = true, nargs = "?" })
+nnoremap("<Space>`1", "<cmd>Relayout 1<CR>")
+nnoremap("<Space>`2", "<cmd>Relayout 2<CR>")
 
 -- Fix errors
 nnoremap("<Space>aa", "<cmd>lua vim.lsp.buf.code_action()<CR>")

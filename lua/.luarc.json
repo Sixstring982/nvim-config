@@ -41,5 +41,6 @@
         "/Users/trent/.local/share/nvim/site/pack/packer/start/wilder.nvim/lua",
         "/Users/trent/.config/nvim/lua",
         "${3rd}/luv/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }
