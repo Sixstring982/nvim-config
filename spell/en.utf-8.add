@@ -45,3 +45,6 @@ backend
 enums
 lifecycle
 OCaml
+allowlist
+stringifies
+Mailgun

@@ -159,6 +159,12 @@ packer.startup(function(use)
 	-- .j2 syntax highlighting
 	use("glench/vim-jinja2-syntax")
 
+  -- Dadbod: Database helper
+  use("tpope/vim-dadbod")
+
+  -- UI for Dadbod
+  use("kristijanhusak/vim-dadbod-ui")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end

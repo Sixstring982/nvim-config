@@ -246,6 +246,16 @@ _G.packer_plugins = {
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-astro",
     url = "https://github.com/wuelnerdotexe/vim-astro"
   },
+  ["vim-dadbod"] = {
+    loaded = true,
+    path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-dadbod",
+    url = "https://github.com/tpope/vim-dadbod"
+  },
+  ["vim-dadbod-ui"] = {
+    loaded = true,
+    path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-dadbod-ui",
+    url = "https://github.com/kristijanhusak/vim-dadbod-ui"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-fugitive",
