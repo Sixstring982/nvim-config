@@ -5,6 +5,15 @@ require("telescope").setup({
     "cue.mod",
     "node_modules",
     "yarn.lock",
+  },
+  pickers = {
+    buffers = {
+      mappings = {
+        n = {
+          ["d"] = "delete_buffer"
+        }
+      }
+    }
   }
 })
 
