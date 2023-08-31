@@ -63,7 +63,6 @@ local servers = {
 	sqlls = {},
 	tailwindcss = {},
 	bashls = {},
-  hls = {},
 	yamlls = {},
 	lua_ls = {},
   rust_analyzer = {},
@@ -73,6 +72,15 @@ local servers = {
 		-- },
 	},
 }
+
+-- Optionally add some LSP servers which need system dependencies
+local function maybe_add_hls()
+  if os.execute("which ghcup") ~= 0 then return end
+
+  servers['hls'] = {}
+end
+
+maybe_add_hls()
 
 -- Setup mason so it can manage 3rd party LSP servers
 require("mason").setup({
