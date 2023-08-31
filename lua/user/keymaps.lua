@@ -133,6 +133,13 @@ nnoremap("<Space>gd", function()
   vim.cmd("Gvdiffsplit!")
 end)
 
+-- [G]it [f]etch + [p]ull
+nnoremap("<Space>gfp", "<cmd>G fp<CR>")
+-- [G]it push branch
+nnoremap("<Space>gpb", "<cmd>G pb<CR>")
+-- [G]it force push branch
+nnoremap("<Space>gpf", "<cmd>G pbf<CR>")
+
 -- DB (Dadbod UI) commands
 --
 -- Open [D]ad[b]od UI
