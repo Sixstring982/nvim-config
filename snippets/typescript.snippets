@@ -1,44 +1,9 @@
-# API Client -- POST
-snippet api-post-client "POST client for API endpoints"
-  export function $1(
-	   request: $1Request, actionParams: ActionParams
-	 ): Promise<$1Response> { 
-	  	return _fetch2('POST', '...url...', RESPONSE_SCHEMA, {
-	  		...actionParams,
-	  		toPostBody(request),
-	  	})
-	 }
+# Region folding boundaries
+snippet region
+	//
+	// #region $1 {{{
+	// 
 
-	 //
-	 // #region Request
-	 //
-
-	 export type $1Request = Readonly<{
-		 //FIXME
-	 }>
-
-	 function toPostBody(request: $1Request): string {
-		 return JSON.stringify({
-			 //FIXME
-		 })
-	 }
-
-	 //
-	 // #endregion Request
-	 // #region Response
-	 //
-
-	 export type $1Response = Readonly<{
-	 }>
-
-   //
-	 // #endregion Response
-	 // #region Parsers
-   //
-
-	 const RESPONSE_SCHEMA = z.object({
-	 }).transform<$1Response>(x => x)
-
-   //
-	 // #endregion Parsers
-   //
+	//
+	// #endregion $1 }}}
+	//
