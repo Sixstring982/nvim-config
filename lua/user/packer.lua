@@ -165,6 +165,9 @@ packer.startup(function(use)
   -- UI for Dadbod
   use("kristijanhusak/vim-dadbod-ui")
 
+  -- Abolish: Case-sensitivity helper
+  use("tpope/vim-abolish")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end
