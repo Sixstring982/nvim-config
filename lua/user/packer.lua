@@ -168,6 +168,9 @@ packer.startup(function(use)
   -- Abolish: Case-sensitivity helper
   use("tpope/vim-abolish")
 
+  -- Commentary: Comment helper
+  use("tpope/vim-commentary")
+
 	if is_bootstrapped then
 		require("packer").sync()
 	end

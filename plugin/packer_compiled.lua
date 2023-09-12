@@ -251,6 +251,11 @@ _G.packer_plugins = {
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-astro",
     url = "https://github.com/wuelnerdotexe/vim-astro"
   },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
+  },
   ["vim-dadbod"] = {
     loaded = true,
     path = "/Users/trent/.local/share/nvim/site/pack/packer/start/vim-dadbod",
