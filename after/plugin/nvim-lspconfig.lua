@@ -149,9 +149,6 @@ null_ls.setup({
 	},
 })
 
--- Turn on LSP status and progress information
-require("fidget").setup()
-
 -- Configure borderd for LspInfo ui
 require("lspconfig.ui.windows").default_options.border = "rounded"
 

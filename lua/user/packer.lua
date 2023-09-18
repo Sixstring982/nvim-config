@@ -69,9 +69,6 @@ packer.startup(function(use)
 
 			-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
 			"folke/neodev.nvim",
-			--
-			-- Progress/Status update for LSP
-			"j-hui/fidget.nvim",
 		},
 	})
 
