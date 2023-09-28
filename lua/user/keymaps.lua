@@ -152,7 +152,7 @@ nnoremap("<Space>db", "<cmd>DBUI<CR>")
 --
 -- OCaml
 --
--- [R]un [O]Caml: [b]uild
+-- [R]un [O]Caml: buil[d]
 nnoremap("<Space>rod", function()
 	tmux.run("cd " .. git.code_path() .. " && dune build -w")
 end)
@@ -216,7 +216,7 @@ nnoremap("<Space>rtt", function()
 end)
 -- [R]un [T]ypeScript: type check
 nnoremap("<Space>rtx", function()
-	tmux.run("cd " .. git.frontend_path() .. " && yarn typecheck --watch")
+	tmux.run("cd " .. git.frontend_path() .. " && bun typecheck --watch")
 end)
 -- [R]un [T]ypeScript: [g]enerate protos
 nnoremap("<Space>rtg", function()

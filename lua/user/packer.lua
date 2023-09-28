@@ -56,6 +56,15 @@ packer.startup(function(use)
 		after = "nvim-treesitter",
 	})
 
+  -- Fidget: LSP indicator
+  use({
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    config = function()
+      require('fidget').setup { }
+    end,
+  })
+
   -- Install LSP
 	use({
 		"neovim/nvim-lspconfig",

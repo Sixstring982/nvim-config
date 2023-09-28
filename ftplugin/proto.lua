@@ -16,3 +16,12 @@ end
 nnoremap("<Space>rf", function()
 	tmux.run("cd " .. code_path() .. " && buf format --path skproto -w")
 end)
+
+-- [R]un [P]roto: breaking
+nnoremap("<Space>rx", function()
+	tmux.run("cd " .. git.code_path() .. ' && buf breaking --path skproto --against=".git#branch=staging"')
+end)
+-- [R]un [P]roto: [l]int
+nnoremap("<Space>rl", function()
+	tmux.run("cd " .. git.code_path() .. " && buf lint --path skproto")
+end)

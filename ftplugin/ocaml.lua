@@ -18,14 +18,33 @@ vim.opt.spell = true
 nnoremap("<Space>oi", function()
 	local current_file = vim.fn.expand("%")
 
-	local matching_file =
-    strings.ends_with(current_file, "mli")
-    and current_file:sub(-1, #current_file - 1)
-		or current_file .. "i"
+	local matching_file = ''
+  if string.match(current_file, ".mli$") then
+    matching_file = string.gsub(current_file, ".mli$", ".ml")
+  else
+    matching_file = string.gsub(current_file, ".ml$", ".mli")
+  end
 
 	vim.cmd("e " .. matching_file)
 end)
 -- [O]pen [d]une file in this directory
 nnoremap("<Space>od", function()
 	vim.cmd("e " .. vim.fn.expand("%:.:h") .. "/dune")
+end)
+
+-- [R]un [O]Caml: [b]uild
+nnoremap("<Space>rb", function()
+	tmux.run("cd " .. git.code_path() .. " && dune build -w")
+end)
+-- [R]un [O]Caml: build [h]ere
+nnoremap("<Space>rh", function()
+  tmux.run("cd " .. git.code_path() .. " && dune build " .. vim.fn.expand("%:.:h") .. " -w")
+end)
+-- [R]un [O]Caml: [t]est
+nnoremap("<Space>rt", function()
+	tmux.run("cd " .. git.code_path() .. " && dune test " .. vim.fn.expand("%:.:h") .. " -w")
+end)
+-- [R]un [O]Caml: [f]ormat
+nnoremap("<Space>rf", function()
+	tmux.run("cd " .. git.code_path() .. " && dune build @fmt --auto-promote")
 end)

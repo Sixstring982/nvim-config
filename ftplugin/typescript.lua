@@ -30,3 +30,51 @@ nnoremap("<Space>rq", function()
 	end)
 	print("Done.")
 end)
+
+-- [R]un [T]ypeScript: [d]ev
+nnoremap("<Space>rd", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn dev")
+end)
+-- [R]un [T]ypeScript: [f]ormat
+nnoremap("<Space>rf", function()
+	tmux.run(
+		"cd "
+			.. git.frontend_path()
+			.. " && yarn prettier $(git diff --relative --name-only HEAD) --write"
+	)
+end)
+-- [R]un [T]ypeScript: [l]int
+nnoremap("<Space>rl", function()
+	tmux.run(
+		"cd "
+			.. git.frontend_path()
+			.. " && "
+			.. "yarn lint $(git diff --relative --name-only HEAD) --fix"
+	)
+end)
+-- [R]un [T]ypeScript: [t]est
+nnoremap("<Space>rt", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn test:unit " .. vim.fn.expand("%:p") .. " --watchAll")
+end)
+-- [R]un [T]ypeScript: type check
+nnoremap("<Space>rx", function()
+	tmux.run("cd " .. git.frontend_path() .. " && bun typecheck --watch")
+end)
+-- [R]un [T]ypeScript: [g]enerate protos
+nnoremap("<Space>rg", function()
+	tmux.run("cd " .. git.frontend_path() .. " && yarn protogen")
+end)
+
+-- [O]pen [t]est: Toggle between test file and implementation
+nnoremap("<Space>ot", function()
+  local current_filename = vim.fn.expand("%")
+
+  local target_filename = ''
+  if string.match(current_filename, ".*.test..*") then
+    target_filename = string.gsub(current_filename, ".test.", ".")
+  else
+    target_filename = string.gsub(current_filename, ".ts", ".test.ts")
+  end
+
+  vim.cmd("e " .. target_filename)
+end)
