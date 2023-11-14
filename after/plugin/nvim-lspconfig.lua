@@ -63,7 +63,10 @@ local servers = {
 	sqlls = {},
 	tailwindcss = {},
 	bashls = {},
-	yamlls = {},
+	yamlls = {
+    -- Don't warn about keys being out of order
+    keyOrdering = false
+  },
 	lua_ls = {},
   rust_analyzer = {},
 	ocamllsp = {

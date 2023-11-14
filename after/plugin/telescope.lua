@@ -1,11 +1,6 @@
 local actions = require("telescope.actions")
 
 require("telescope").setup({
-  file_ignore_patterns = {
-    "cue.mod",
-    "node_modules",
-    "yarn.lock",
-  },
   pickers = {
     buffers = {
       mappings = {

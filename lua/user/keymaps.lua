@@ -48,21 +48,21 @@ nnoremap("<Space>ep", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
 -- Redo layout
 vim.api.nvim_create_user_command("Relayout", function(opts)
-  -- The number of left-windows to create: Defaults to 2.
-  local splits = opts['fargs'][1] or 2
+	-- The number of left-windows to create: Defaults to 2.
+	local splits = opts["fargs"][1] or 2
 
-  -- Close all windows
-  vim.cmd("only")
+	-- Close all windows
+	vim.cmd("only")
 
-  -- Create the "left-windows"
-  for _ = 1, splits do
-    vim.cmd("vsplit")
-  end
+	-- Create the "left-windows"
+	for _ = 1, splits do
+		vim.cmd("vsplit")
+	end
 
-  vim.cmd("windo2")
-  require("harpoon.term").gotoTerminal(1)
-  vim.api.nvim_win_set_width(0, 99)
-  vim.cmd("windo0")
+	vim.cmd("windo2")
+	require("harpoon.term").gotoTerminal(1)
+	vim.api.nvim_win_set_width(0, 99)
+	vim.cmd("windo0")
 end, { force = true, nargs = "?" })
 nnoremap("<Space>`1", "<cmd>Relayout 1<CR>")
 nnoremap("<Space>`2", "<cmd>Relayout 2<CR>")
@@ -70,14 +70,13 @@ nnoremap("<Space>`2", "<cmd>Relayout 2<CR>")
 -- Fix errors
 nnoremap("<Space>aa", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 nnoremap("<Space>af", function()
-  vim.lsp.buf.code_action({
-    filter = function(a)
-      return a.isPreferred
-    end,
-    apply = true
-  })
+	vim.lsp.buf.code_action({
+		filter = function(a)
+			return a.isPreferred
+		end,
+		apply = true,
+	})
 end)
-
 
 -- Rename
 nnoremap("<Space>rr", "<cmd>lua vim.lsp.buf.rename()<CR>")
@@ -109,17 +108,17 @@ nnoremap("<Space>lr", "<cmd>LspRestart<CR>")
 --
 -- Stop anything in the tmux window
 nnoremap("<Space>ck", function()
-  tmux.ctrl_c()
+	tmux.ctrl_c()
 end)
 
 -- Send anything to the tmux window
 nnoremap("<Space>cC", function()
-  local command = vim.fn.input("Compile command: ")
-  tmux.run(command)
+	local command = vim.fn.input("Compile command: ")
+	tmux.run(command)
 end)
 -- Re-send the last verbatim command
 nnoremap("<Space>cr", function()
-  tmux.re_run()
+	tmux.re_run()
 end)
 
 -- Git commands
@@ -128,9 +127,9 @@ end)
 nnoremap("<Space>gs", "<cmd>Gedit :<CR>")
 -- [G]it [d]iff (for fixing merge conflicts)
 nnoremap("<Space>gd", function()
-  -- Open a new tab focusing the current file...
-  vim.cmd("tab split")
-  vim.cmd("Gvdiffsplit!")
+	-- Open a new tab focusing the current file...
+	vim.cmd("tab split")
+	vim.cmd("Gvdiffsplit!")
 end)
 
 -- [G]it [f]etch + [p]ull
@@ -145,7 +144,6 @@ nnoremap("<Space>gpf", "<cmd>G pbf<CR>")
 -- Open [D]ad[b]od UI
 nnoremap("<Space>db", "<cmd>DBUI<CR>")
 
-
 -- Run commands
 --
 
@@ -158,7 +156,7 @@ nnoremap("<Space>rod", function()
 end)
 -- [R]un [O]Caml: build [h]ere
 nnoremap("<Space>roh", function()
-  tmux.run("cd " .. git.code_path() .. " && dune build " .. vim.fn.expand("%:.:h") .. " -w")
+	tmux.run("cd " .. git.code_path() .. " && dune build " .. vim.fn.expand("%:.:h") .. " -w")
 end)
 -- [R]un [O]Caml: [t]est
 nnoremap("<Space>rot", function()
@@ -185,7 +183,6 @@ nnoremap("<Space>rpl", function()
 	tmux.run("cd " .. git.code_path() .. " && buf lint --path skproto")
 end)
 
-
 --
 -- TypeScript
 --
@@ -195,20 +192,13 @@ nnoremap("<Space>rtd", function()
 end)
 -- [R]un [T]ypeScript: [f]ormat
 nnoremap("<Space>rtf", function()
-	tmux.run(
-		"cd "
-			.. git.frontend_path()
-			.. " && yarn prettier $(git diff --relative --name-only HEAD) --write"
-	)
+	local files = git.relative_pending_files(git.frontend_path())
+	tmux.run("cd " .. git.frontend_path() .. " && yarn prettier " .. files .. " --write")
 end)
 -- [R]un [T]ypeScript: [l]int
 nnoremap("<Space>rtl", function()
-	tmux.run(
-		"cd "
-			.. git.frontend_path()
-			.. " && "
-			.. "yarn lint $(git diff --relative --name-only HEAD) --fix"
-	)
+	local files = git.relative_pending_files(git.frontend_path())
+	tmux.run("cd " .. git.frontend_path() .. " && yarn lint " .. files .. " --fix")
 end)
 -- [R]un [T]ypeScript: [t]est
 nnoremap("<Space>rtt", function()
