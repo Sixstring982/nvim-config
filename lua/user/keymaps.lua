@@ -144,6 +144,11 @@ nnoremap("<Space>gpf", "<cmd>G pbf<CR>")
 -- Open [D]ad[b]od UI
 nnoremap("<Space>db", "<cmd>DBUI<CR>")
 
+-- RestNvim (Rest client) commands
+--
+-- Evaluate [R]est [q]uery
+nnoremap("<Space>qr", "<Plug>RestNvim<CR>")
+
 -- Run commands
 --
 
