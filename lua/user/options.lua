@@ -12,3 +12,13 @@ vim.opt.expandtab = true
 -- Enable folding via markers
 vim.opt.foldmethod = "marker"
 vim.opt.foldlevel = 1
+
+-- Visible whitespace
+vim.opt.listchars:append({
+	trail = "▒",
+	tab = ">-",
+	nbsp = "␣",
+})
+vim.opt.list = true
+-- Highlight trailing whitespace in red
+vim.cmd([[match errorMsg /\s\+$/]])

@@ -60,7 +60,10 @@ vim.api.nvim_create_user_command("Relayout", function(opts)
 	end
 
 	vim.cmd("windo2")
-	require("harpoon.term").gotoTerminal(1)
+  -- Open a terminal and start up tmux
+  vim.cmd('terminal')
+  vim.api.nvim_chan_send(vim.bo.channel, "tmux a\r")
+
 	vim.api.nvim_win_set_width(0, 99)
 	vim.cmd("windo0")
 end, { force = true, nargs = "?" })

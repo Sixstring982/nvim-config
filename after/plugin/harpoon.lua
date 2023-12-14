@@ -1,27 +1,29 @@
 -- Harpoon: Mark files you'd like to visit regularly in an editing session.
-
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
+local harpoon = require("harpoon")
+harpoon:setup({})
 
 -- <Space>m: Managed marked files
 -- <Space>mm: Toggle file as marked
 vim.keymap.set('n', '<Space>mm', function()
-  mark.toggle_file(vim.fn.expand("%"))
+  harpoon:list():append()
+  print("Mark added")
 end)
 
 vim.keymap.set('n', '<Space>mz', function()
-  mark.clear_all()
+  harpoon:list():clear()
   print("Marks cleared")
 end)
 
 -- Browse marked files
 require("telescope").load_extension("harpoon")
-vim.keymap.set('n', '<Space>pm', "<cmd>Telescope harpoon marks<CR>")
+vim.keymap.set('n', '<Space>pm', function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
 
 -- Go to marked file by number
 local harpoon_nav = function(n)
   return function()
-  ui.nav_file(n)
+  harpoon:list():select(n)
   print("Opening harpoon file #" .. n)
   end
 end
