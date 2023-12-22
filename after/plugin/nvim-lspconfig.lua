@@ -74,6 +74,7 @@ local servers = {
 		-- 	cmd = ocamllsp_cmd_override(),
 		-- },
 	},
+  rnix = {},
 }
 
 -- Optionally add some LSP servers which need system dependencies

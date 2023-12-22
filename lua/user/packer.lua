@@ -181,6 +181,13 @@ packer.startup(function(use)
 	-- Commentary: Comment helper
 	use("tpope/vim-commentary")
 
+  use({
+    "stevearc/oil.nvim",
+    config = function()
+      require("oil").setup()
+    end,
+  })
+
 	-- rest-nvim: REST client, like Insomnia
 	use({
 		"rest-nvim/rest.nvim",

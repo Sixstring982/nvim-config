@@ -37,7 +37,7 @@ nnoremap("<leader>f", "<cmd> lua vim.lsp.buf.format()<CR>")
 nnoremap("<C-x><C-s>", ":w<CR>")
 
 -- Open files
-nnoremap("<C-x><C-f>", ":Ex<CR>/")
+nnoremap("<C-x><C-f>", "<CMD>Oil<CR>")
 
 -- Close buffer
 nnoremap("<C-x>k", ":bp<BAR>:bd#<CR>")
