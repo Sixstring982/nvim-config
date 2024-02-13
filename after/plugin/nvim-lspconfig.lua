@@ -45,6 +45,7 @@ end
 -- LSP servers to install (see list here: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers)
 local servers = {
   astro = {},
+  dhall_lsp_server = {},
 	tsserver = {
 		settings = {
 			experimental = {
@@ -55,9 +56,11 @@ local servers = {
 			["textDocument/publishDiagnostics"] = vim.lsp.with(tsserver_on_publish_diagnostics_override, {}),
 		},
 	},
+  gopls = {},
   bufls = {},
 	cssls = {},
   eslint = {},
+  hls = {},  -- haskell
 	jsonls = {},
 	marksman = {},
 	sqlls = {},
@@ -95,7 +98,9 @@ require("mason").setup({
 
 -- Configure mason to auto install servers
 require("mason-lspconfig").setup({
-	automatic_installation = { exclude = { "ocamllsp" } },
+	automatic_installation = {
+    exclude = { "ocamllsp", "hls" },
+  },
 })
 
 -- nvim-cmp supports additional completion capabilities
