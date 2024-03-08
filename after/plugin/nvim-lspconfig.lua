@@ -63,6 +63,7 @@ local servers = {
   hls = {},  -- haskell
 	jsonls = {},
 	marksman = {},
+  pyright = {},
 	sqlls = {},
 	tailwindcss = {},
 	bashls = {},
@@ -99,7 +100,7 @@ require("mason").setup({
 -- Configure mason to auto install servers
 require("mason-lspconfig").setup({
 	automatic_installation = {
-    exclude = { "ocamllsp", "hls" },
+    exclude = { "ocamllsp", "hls", "pyright" },
   },
 })
 
