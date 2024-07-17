@@ -59,7 +59,6 @@ packer.startup(function(use)
 	-- Fidget: LSP indicator
 	use({
 		"j-hui/fidget.nvim",
-		tag = "legacy",
 		config = function()
 			require("fidget").setup({})
 		end,
@@ -117,17 +116,8 @@ packer.startup(function(use)
 		cond = vim.fn.executable("make") == 1,
 	})
 
-	-- Install nvim-tree for a vscode-like file tree/explorer
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			-- vscode icones
-			"nvim-tree/nvim-web-devicons",
-			-- Integrate lsp actions with file operations
-			"antosha417/nvim-lsp-file-operations",
-		},
-		tag = "nightly",
-	})
+  -- easypick: Make telescope plugins from shell commands
+  use({'axkirillov/easypick.nvim', requires = 'nvim-telescope/telescope.nvim'})
 
 	-- Install indent_blankline to style indentation
 	use("lukas-reineke/indent-blankline.nvim")

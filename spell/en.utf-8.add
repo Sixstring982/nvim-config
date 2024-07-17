@@ -56,3 +56,5 @@ FSM
 region
 Memoization
 Memoizes
+HEAD
+LIMIT_ORDER

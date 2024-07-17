@@ -13,6 +13,7 @@ local function frontend_path()
 	return git.path_relative_to_repo_root("/frontend")
 end
 
+
 --
 -- Kebindings
 --
@@ -78,3 +79,5 @@ nnoremap("<Space>ot", function()
 
   vim.cmd("e " .. target_filename)
 end)
+
+

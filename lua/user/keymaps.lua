@@ -27,11 +27,13 @@ nnoremap("<C-x>b", "<cmd>lua require('telescope.builtin').buffers()<CR>")
 -- Fuzzy-find + grep
 nnoremap("<Space>ps", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
 nnoremap("<Space>pl", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
+-- See usages
+nnoremap("<Space>pr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>")
 -- Query LSP errors
 nnoremap("<Space>pq", "<cmd>lua require('telescope.builtin').diagnostics()<CR>")
 
 -- Format current buffer
-nnoremap("<leader>f", "<cmd> lua vim.lsp.buf.format()<CR>")
+nnoremap("<leader>f", "<cmd>Format<CR>")
 
 -- Save file
 nnoremap("<C-x><C-s>", ":w<CR>")
@@ -89,8 +91,9 @@ nnoremap("<Space>hh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
 -- Go to definition (and focus in the middle of the screen)
 nnoremap("<Space>gg", "<cmd>lua vim.lsp.buf.definition()<CR>zz")
--- See usages
-nnoremap("<Space>gu", "<cmd>lua require('telescope.builtin').lsp_references()<CR>")
+
+-- Signature help
+nnoremap("<Space>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>zz")
 
 -- Center screen when using page-up/down
 nnoremap("<C-u>", "<C-u>zz")
@@ -154,6 +157,14 @@ nnoremap("<Space>qr", "<Plug>RestNvim<CR>")
 
 -- Run commands
 --
+
+--
+-- Yarn
+--
+-- Find and run yarn tasks
+nnoremap("<Space>yr", function()
+  vim.cmd("Easypick yarn_tasks")
+end)
 
 --
 -- OCaml
