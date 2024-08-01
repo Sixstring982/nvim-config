@@ -56,28 +56,15 @@ packer.startup(function(use)
 		after = "nvim-treesitter",
 	})
 
+  -- Conform: formatters
+  use({ 'stevearc/conform.nvim' })
+
 	-- Fidget: LSP indicator
 	use({
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup({})
 		end,
-	})
-
-	-- Install LSP
-	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			-- Plugin and UI to automatically install LSPs to stdpath
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-
-			-- Install null-ls for diagnostics, code actions, and formatting
-			"jose-elias-alvarez/null-ls.nvim",
-
-			-- Install neodev for better nvim configuration and plugin authoring via lsp configurations
-			"folke/neodev.nvim",
-		},
 	})
 
 	-- LuaSnip: Snippet engine
