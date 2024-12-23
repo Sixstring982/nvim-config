@@ -1,9 +1,5 @@
 local conform = require("conform")
 
-local function sleep(n)
-  os.execute("sleep " .. tonumber(n))
-end
-
 ---@param initialize_lsp fun(): integer?
 ---@return { start: (fun(): nil), stop: (fun(): nil) }
 local function make_lsp_management_fns(initialize_lsp)
@@ -34,6 +30,48 @@ local function make_lsp_management_fns(initialize_lsp)
     }
 end
 
+-- Go {{{
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "haskell" },
+  callback = function()
+    local root_dir = vim.fs.dirname(
+      vim.fs.find({ '.git' }, { upwards = true })[1]
+    )
+
+    local lsp = make_lsp_management_fns(function()
+      return vim.lsp.start({
+        name = "hls",
+        cmd = { "haskell-language-server-wrapper", "lsp" },
+        root_dir = root_dir,
+        settings = {
+        }
+      })
+    end)
+
+    lsp.start()
+
+    --
+    -- :Format function
+    --
+    vim.api.nvim_create_user_command('Format', function(args)
+      conform.format({ bufnr = args.buf })
+    end, { desc = "Format buffer", nargs = 0 })
+
+    --
+    -- :LspStart, :LspStop, :LspRestart functions
+    --
+    vim.api.nvim_create_user_command('LspStart', function()
+      lsp.start()
+    end, { desc = "Start LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspStop', function()
+      lsp.stop()
+    end, { desc = "Stop LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspRestart', function()
+      lsp.stop()
+    end, { desc = "Restart LSP server", nargs = 0 })
+  end
+})
+-- }}}
 -- Lua {{{
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
@@ -65,9 +103,93 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 -- }}}
+-- Go {{{
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "go" },
+  callback = function()
+    local root_dir = vim.fs.dirname(
+      vim.fs.find({ '.git' }, { upwards = true })[1]
+    )
+
+    local lsp = make_lsp_management_fns(function()
+      return vim.lsp.start({
+        name = "gopls",
+        cmd = { "gopls" },
+        root_dir = root_dir,
+        settings = {
+        }
+      })
+    end)
+
+    lsp.start()
+
+    --
+    -- :Format function
+    --
+    vim.api.nvim_create_user_command('Format', function(args)
+      conform.format({ bufnr = args.buf })
+    end, { desc = "Format buffer", nargs = 0 })
+
+    --
+    -- :LspStart, :LspStop, :LspRestart functions
+    --
+    vim.api.nvim_create_user_command('LspStart', function()
+      lsp.start()
+    end, { desc = "Start LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspStop', function()
+      lsp.stop()
+    end, { desc = "Stop LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspRestart', function()
+      lsp.stop()
+    end, { desc = "Restart LSP server", nargs = 0 })
+  end
+})
+-- }}}
+-- Rust {{{
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust" },
+  callback = function()
+    local root_dir = vim.fs.dirname(
+      vim.fs.find({ '.git' }, { upwards = true })[1]
+    )
+
+    local lsp = make_lsp_management_fns(function()
+      return vim.lsp.start({
+        name = "rust-analyzer",
+        cmd = { "rust-analyzer" },
+        root_dir = root_dir,
+        settings = {
+        }
+      })
+    end)
+
+    lsp.start()
+
+    --
+    -- :Format function
+    --
+    vim.api.nvim_create_user_command('Format', function(args)
+      conform.format({ bufnr = args.buf })
+    end, { desc = "Format buffer", nargs = 0 })
+
+    --
+    -- :LspStart, :LspStop, :LspRestart functions
+    --
+    vim.api.nvim_create_user_command('LspStart', function()
+      lsp.start()
+    end, { desc = "Start LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspStop', function()
+      lsp.stop()
+    end, { desc = "Stop LSP server", nargs = 0 })
+    vim.api.nvim_create_user_command('LspRestart', function()
+      lsp.stop()
+    end, { desc = "Restart LSP server", nargs = 0 })
+  end
+})
+-- }}}
 -- TypeScript {{{
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "javascript" },
+  pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   callback = function()
     --
     -- Attach language server

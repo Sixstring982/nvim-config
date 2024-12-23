@@ -72,6 +72,13 @@ end, { force = true, nargs = "?" })
 nnoremap("<Space>`1", "<cmd>Relayout 1<CR>")
 nnoremap("<Space>`2", "<cmd>Relayout 2<CR>")
 
+-- 2x<Space>: Jump tabs
+nnoremap("<Space><Space>1", "1gt")
+nnoremap("<Space><Space>2", "2gt")
+nnoremap("<Space><Space>3", "3gt")
+nnoremap("<Space><Space>4", "4gt")
+nnoremap("<Space><Space>5", "5gt")
+
 -- Fix errors
 nnoremap("<Space>aa", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 nnoremap("<Space>af", function()
@@ -90,7 +97,11 @@ nnoremap("<Space>rr", "<cmd>lua vim.lsp.buf.rename()<CR>")
 nnoremap("<Space>hh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
 -- Go to definition (and focus in the middle of the screen)
-nnoremap("<Space>gg", "<cmd>lua vim.lsp.buf.definition()<CR>zz")
+nnoremap("<Space>gg", "<cmd>lua vim.lsp.buf.definition()<CR>")
+-- Go to implementation
+nnoremap("<Space>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+-- Change git branch
+nnoremap("<Space>gb", "<cmd>lua require('telescope.builtin').git_branches()<CR>")
 
 -- Signature help
 nnoremap("<Space>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>zz")
@@ -124,6 +135,11 @@ nnoremap("<Space>cC", function()
 end)
 -- Re-send the last verbatim command
 nnoremap("<Space>cr", function()
+	tmux.re_run()
+end)
+-- Re-send the last verbatim command, but Ctrl+C first
+nnoremap("<Space>cR", function()
+  tmux.ctrl_c()
 	tmux.re_run()
 end)
 
