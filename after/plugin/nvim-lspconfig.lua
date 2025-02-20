@@ -198,7 +198,7 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.fs.find({ 'tsconfig.json', '.git' }, { upward = true })[1]
     )
 
-    local lsp = make_lsp_management_fns(function()
+    local tsc = make_lsp_management_fns(function()
       local client = vim.lsp.start({
         name = "typescript-language-server",
         cmd = { "typescript-language-server", "--stdio" },
@@ -237,8 +237,18 @@ vim.api.nvim_create_autocmd("FileType", {
 
       return client
     end)
+    tsc.start()
 
-    lsp.start()
+    local eslint_d = make_lsp_management_fns(function()
+      local client = vim.lsp.start({
+        name = "eslint-lsp",
+        cmd = { "eslint-lsp", "--stdio" },
+        root_dir = root_dir,
+      })
+
+      return client
+    end)
+    eslint_d.start()
 
     --
     -- :Format function
@@ -265,13 +275,16 @@ vim.api.nvim_create_autocmd("FileType", {
     -- :LspStart, :LspStop, :LspRestart functions
     --
     vim.api.nvim_create_user_command('LspStart', function()
-      lsp.start()
+      tsc.start()
+      eslint_d.start()
     end, { desc = "Start LSP server", nargs = 0 })
     vim.api.nvim_create_user_command('LspStop', function()
-      lsp.stop()
+      tsc.stop()
+      eslint_d.stop()
     end, { desc = "Stop LSP server", nargs = 0 })
     vim.api.nvim_create_user_command('LspRestart', function()
-      lsp.stop()
+      tsc.stop()
+      eslint_d.stop()
     end, { desc = "Restart LSP server", nargs = 0 })
   end
 })
