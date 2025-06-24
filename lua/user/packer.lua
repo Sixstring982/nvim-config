@@ -175,8 +175,11 @@ packer.startup(function(use)
 	-- rest-nvim: REST client, like Insomnia
 	use({
 		"rest-nvim/rest.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		commit = "8b62563",
+		requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
+    },
+		commit = "2ded89dbd",
 		config = function()
 			require("rest-nvim").setup({
 				-- Open request results in a horizontal split

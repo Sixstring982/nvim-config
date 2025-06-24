@@ -169,7 +169,7 @@ nnoremap("<Space>db", "<cmd>DBUI<CR>")
 -- RestNvim (Rest client) commands
 --
 -- Evaluate [R]est [q]uery
-nnoremap("<Space>qr", "<Plug>RestNvim<CR>")
+nnoremap("<Space>qr", "<cmd>Rest run<CR>")
 
 -- Run commands
 --
