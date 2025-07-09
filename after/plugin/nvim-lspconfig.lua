@@ -201,6 +201,14 @@ vim.api.nvim_create_autocmd("FileType", {
     local tsc = make_lsp_management_fns(function()
       local client = vim.lsp.start({
         name = "typescript-language-server",
+        -- Note that if this doesn't work, you'll need to do the following
+        -- for the repo that you're working in:
+        --
+        -- * Install `typescript`, which installs the `tsserver` binary
+        -- * Install `typescript-language-server`, which installs that binary
+        -- * Make sure that your `node_modules/.bin` which corresponds to
+        --   this repo is on PATH (direnv can do this via the `PATH_add`
+        --   function)
         cmd = { "typescript-language-server", "--stdio" },
         root_dir = root_dir,
         init_options = {
